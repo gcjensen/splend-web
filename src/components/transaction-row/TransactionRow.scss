@@ -1,5 +1,6 @@
 .transaction-row {
   display: grid;
+  font-size: 14px;
   grid-template-columns: 280px 160px 160px;
   margin-top: 30px;
 }
@@ -27,7 +28,22 @@
   @include centered-grid;
 }
 
-.amount {
+.amounts {
   @include centered-grid;
   grid-template-rows: auto auto;
+
+  .styled-amount {
+    .pounds {
+      font-size: 16px;
+    }
+
+    .pence {
+      font-size: 12px;
+    }
+  }
+
+  .total-amount {
+    color: gray;
+    font-size: 12px;
+  }
 }
