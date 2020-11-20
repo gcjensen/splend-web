@@ -1,0 +1,7 @@
+.App {
+  display: grid;
+  font-family: "Ubuntu", sans-serif;
+  grid-template-columns: 300px auto;
+  grid-template-areas: "sidebar main";
+  padding-top: 20px;
+}

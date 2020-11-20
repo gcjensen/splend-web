@@ -1,0 +1,33 @@
+.transaction-row {
+  display: grid;
+  grid-template-columns: 280px 160px 160px;
+  margin-top: 30px;
+}
+
+.des-and-time {
+  display: grid;
+  grid-template-rows: auto auto;
+
+  h4 {
+    margin: 0 0 10px 0;
+  }
+
+  .grey-text {
+    color: grey;
+    font-size: 14px;
+  }
+}
+
+@mixin centered-grid {
+  display: grid;
+  align-items: center;
+}
+
+.category {
+  @include centered-grid;
+}
+
+.amount {
+  @include centered-grid;
+  grid-template-rows: auto auto;
+}
