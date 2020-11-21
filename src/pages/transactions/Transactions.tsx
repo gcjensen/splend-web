@@ -30,7 +30,7 @@ function Transactions() {
 
             return (
               <li className="group-section" key={grouped.date.toString()}>
-                <h5 className="heading">{date}</h5>
+                <h5 className="grey-label">{date}</h5>
                 {grouped.transactions.map((t) => (
                   <TransactionRow key={t.id.toString()} transaction={t} />
                 ))}

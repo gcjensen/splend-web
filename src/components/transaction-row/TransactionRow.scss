@@ -26,6 +26,23 @@
 
 .category {
   @include centered-grid;
+
+  .label {
+    border-radius: 10px;
+    font-size: 12px;
+    padding: 5px 10px;
+    width: fit-content;
+  }
+
+  .bills {
+    background-color: hsl(351, 100%, 97%);
+    color: hsl(351, 100%, 40%);
+  }
+
+  .groceries {
+    background-color: hsl(156, 100%, 95%);
+    color: hsl(156, 100%, 18%);
+  }
 }
 
 .amounts {

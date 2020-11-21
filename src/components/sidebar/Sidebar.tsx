@@ -18,7 +18,7 @@ function Sidebar() {
       </div>
 
       <div className="section">
-        <label className="heading">Balance</label>
+        <label className="grey-label">Balance</label>
         <h2 className="balance">£143.32</h2>
       </div>
 

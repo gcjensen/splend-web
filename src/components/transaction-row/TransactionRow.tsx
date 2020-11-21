@@ -31,16 +31,27 @@ function styleAmount(amount: string) {
   );
 }
 
+function styleCategory(category: string) {
+  return (
+    <div className={`label ${category.toLowerCase()}`}>
+      {/* <span className={`dot ${category}`}></span> */}
+      <span>{category}</span>
+    </div>
+  );
+}
+
 function TransactionRow(props: Props) {
   return (
     <div className="transaction-row">
       <div className="des-and-time">
         <h4>{props.transaction.description}</h4>
-        <span className="grey-text">
+        <span className="grey-label">
           {formatDate(props.transaction.timestamp)}
         </span>
       </div>
-      <div className="category">{props.transaction.category}</div>
+      <div className="category">
+        {styleCategory(props.transaction.category)}
+      </div>
       <div className="amounts">
         {styleAmount(props.transaction.owed)}
         <span className="total-amount">
