@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Don't want to include the API URL for now
+src/lib/constants/api.ts
