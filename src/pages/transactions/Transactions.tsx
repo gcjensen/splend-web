@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { parseISO, format } from "date-fns";
 
+import UserContext from "../../lib/context/user-context";
 import TransactionRow from "../../components/transaction-row/TransactionRow";
 import {
   getTransactions,
@@ -9,16 +10,19 @@ import {
 import "./Transactions.scss";
 
 function Transactions() {
+  const user = useContext(UserContext);
   const [transactions, setTransactions] = useState<GroupedTransactions[]>([]);
 
   useEffect(() => {
     const loadTransactions = async () => {
-      const txs = await getTransactions();
+      const txs = await getTransactions(user.id, user.token || "");
       setTransactions(txs);
     };
 
-    loadTransactions();
-  }, []);
+    if (user.id) {
+      loadTransactions();
+    }
+  }, [user.id, user.token]);
 
   return (
     <div>

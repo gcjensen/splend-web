@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
+import casual from "casual";
 
 import { User, getSummary } from "../../lib/api/user";
 import UserContext from "../../lib/context/user-context";
@@ -8,10 +9,10 @@ import Sidebar from "./Sidebar";
 jest.mock("../../lib/api/user");
 
 const mockUser = {
-  email: "moff@gideon.com",
-  firstName: "Moff",
-  id: 1,
-  lastName: "Gideon",
+  email: casual.email,
+  firstName: casual.first_name,
+  id: casual.integer(),
+  lastName: casual.last_name,
 };
 
 test("renders the user details and fetches their balance", async () => {
@@ -25,7 +26,6 @@ test("renders the user details and fetches their balance", async () => {
   );
 
   expect(screen.getByText(mockUser.email)).toBeInTheDocument();
-  expect(screen.getByText(/Moff G./i)).toBeInTheDocument();
 
   expect(getSummary).toHaveBeenCalledTimes(1);
 

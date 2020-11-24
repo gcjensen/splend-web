@@ -1,35 +1,6 @@
-const testData = [
-  {
-    amount: "10000",
-    category: "Bills",
-    description: "Parking Permit",
-    id: 13,
-    owed: "5000",
-    settled: "2018-10-30T16:40:41Z",
-    spender: "1",
-    timestamp: "2018-09-05T21:25:14Z",
-  },
-  {
-    amount: "3329",
-    category: "Bills",
-    description: "Water Bill",
-    id: 12,
-    owed: "1664",
-    settled: "2018-10-01T22:45:31Z",
-    spender: "1",
-    timestamp: "2018-09-03T21:24:53Z",
-  },
-  {
-    amount: "6600",
-    category: "Groceries",
-    description: "Aldi",
-    id: 11,
-    owed: "3300",
-    settled: "2018-10-01T22:45:31Z",
-    spender: "1",
-    timestamp: "2018-09-03T21:24:13Z",
-  },
-];
+import { API_URL } from "../constants/api";
+
+const numTransactionsToShow = 20;
 
 export interface Transaction {
   amount: string;
@@ -47,10 +18,21 @@ export interface GroupedTransactions {
   transactions: Transaction[];
 }
 
-export async function getTransactions() {
-  const transactions = await Promise.resolve(testData);
+export async function getTransactions(
+  userID: number,
+  token: string
+): Promise<GroupedTransactions[]> {
+  const response = await fetch(`${API_URL}/user/${userID}/outgoings`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Token: token,
+    },
+  });
 
-  return groupTransactionsByDate(transactions);
+  const transactions = await response.json();
+
+  return groupTransactionsByDate(transactions.slice(0, numTransactionsToShow));
 }
 
 function groupTransactionsByDate(txs: Transaction[]): GroupedTransactions[] {
