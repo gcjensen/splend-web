@@ -8,6 +8,26 @@ export interface User {
   id: number;
   lastName: string;
   partner: User;
+  token?: string;
+}
+
+export interface Summary {
+  balance: number;
+}
+
+export async function getSummary(
+  userID: number,
+  token: string
+): Promise<Summary> {
+  const response = await fetch(`${API_URL}/user/${userID}/summary`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Token: token,
+    },
+  });
+
+  return await response.json();
 }
 
 export async function logIn(email: string, token: string): Promise<User> {
@@ -20,5 +40,8 @@ export async function logIn(email: string, token: string): Promise<User> {
     body: JSON.stringify({ email }),
   });
 
-  return await response.json();
+  const user = await response.json();
+  user.token = token;
+
+  return user;
 }

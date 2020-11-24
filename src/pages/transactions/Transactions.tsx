@@ -11,12 +11,12 @@ import "./Transactions.scss";
 function Transactions() {
   const [transactions, setTransactions] = useState<GroupedTransactions[]>([]);
 
-  const loadTransactions = async () => {
-    const txs = await getTransactions();
-    setTransactions(txs);
-  };
-
   useEffect(() => {
+    const loadTransactions = async () => {
+      const txs = await getTransactions();
+      setTransactions(txs);
+    };
+
     loadTransactions();
   }, []);
 

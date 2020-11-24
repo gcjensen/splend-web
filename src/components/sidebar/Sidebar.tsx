@@ -1,13 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { BiTransfer } from "react-icons/bi";
 
 import UserContext from "../../lib/context/user-context";
+import { getSummary, Summary } from "../../lib/api/user";
 import "../../styles/Base.scss";
 import "./Sidebar.scss";
 
 function Sidebar() {
   const user = useContext(UserContext);
+  const [summary, setSummary] = useState<Summary>({} as Summary);
+
+  useEffect(() => {
+    async function loadSummary() {
+      const summary = await getSummary(user.id, user.token || "");
+      setSummary(summary);
+    }
+
+    if (user.id) {
+      loadSummary();
+    }
+  }, [user]);
 
   return (
     <div className="sidebar">
@@ -23,7 +36,9 @@ function Sidebar() {
 
       <div className="section">
         <label className="grey-label">Balance</label>
-        <h2 className="balance">£143.32</h2>
+        {summary && summary.balance && (
+          <h2 className="balance">£{(summary.balance / 100).toFixed(2)}</h2>
+        )}
       </div>
 
       <ul className="nav">
